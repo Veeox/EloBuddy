@@ -13,6 +13,10 @@ namespace PetBuddy
 {
     internal class PetMain
     {
+
+        //Sprite
+        public static EloBuddy.SDK.Rendering.Sprite sprite = null;
+        public static string petSprite;
         public static void Init()
         {
             InitMenu();

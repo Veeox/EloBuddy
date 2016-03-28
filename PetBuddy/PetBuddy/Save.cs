@@ -22,9 +22,9 @@ namespace PetBuddy
         {
             //Grab data from text file else create it
             FileName = "PetBuddy.txt";
-            if (!Directory.Exists(Config.AppDataDirectory + @"\Data\PetBuddy"))
+            if (!Directory.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy"))
             {
-                Directory.CreateDirectory(Config.AppDataDirectory + @"\Data\PetBuddy");
+                Directory.CreateDirectory(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy");
                 FirstRun();
 
             }
@@ -43,7 +43,7 @@ namespace PetBuddy
             string MaxXPStr = null;
             string CashStr = null;
 
-            using (var sr = new System.IO.StreamReader(Config.AppDataDirectory + @"\Data\PetBuddy\" + FileName, true))
+            using (var sr = new System.IO.StreamReader(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, true))
             {
                 string line;
                 int currentLineNumber = 0;
@@ -78,8 +78,8 @@ namespace PetBuddy
         //Used to save data
         public static void SaveData(string lvl, string currxp, string maxxp, string cash)
         {
-            File.WriteAllText(Config.AppDataDirectory + @"\Data\PetBuddy\" + FileName, Pet.PetName + "\n" + Pet.mySprite + "\n");
-            using (var file = new StreamWriter(Config.AppDataDirectory + @"\Data\PetBuddy\" + FileName, true))
+            File.WriteAllText(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, Pet.PetName + "\n" + Pet.mySprite + "\n");
+            using (var file = new StreamWriter(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, true))
             {
                 file.WriteLine(lvl);
                 file.WriteLine(currxp);
