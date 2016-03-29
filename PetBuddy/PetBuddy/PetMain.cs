@@ -152,21 +152,21 @@ namespace PetBuddy
                         }
                     }
                     break;
-                case GameEventId.OnHQDie:
-                    pl = FindPlayerByNetworkId(killer);
-                    //if (pl != null && pl.IsAlly || pl.IsMe)
-                    //{
-                        Pet.CurXP += Pet.MaxXP / 10;
-                        Pet.CashBalance += 100;
-                        Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-                        Save.SaveData();
-                        Chat.Print("end");
-                        if (Pet.Sick)
-                        {
-                            Pet.PetDie();
-                        }
-                   // }
-                    break;
+                //case GameEventId.OnHQDie:
+                //    pl = FindPlayerByNetworkId(killer);
+                //    //if (pl != null && pl.IsAlly || pl.IsMe)
+                //    //{
+                //        Pet.CurXP += Pet.MaxXP / 10;
+                //        Pet.CashBalance += 100;
+                //        Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                //        Save.SaveData();
+                //        Chat.Print("end");
+                //        if (Pet.Sick)
+                //        {
+                //            Pet.PetDie();
+                //        }
+                //   // }
+                //    break;
             }
         }
 
