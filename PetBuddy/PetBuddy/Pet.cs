@@ -84,6 +84,8 @@ namespace PetBuddy
             }
         }
 
+        
+
         public static void NotiSick()
         {
             Notifications.Show(new SimpleNotification("PetBuddy", "Your pet is sick!"));

@@ -146,7 +146,7 @@ namespace PetBuddy
                 case GameEventId.OnChampionDie:
                     if (killer == hero.NetworkId && !Pet.Sick)
                     {
-                        if (Pet.Lvl > 0)
+                        if (Pet.Lvl > 2)
                         {
                             Pet.GetSick();
                         }
@@ -230,29 +230,52 @@ namespace PetBuddy
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
         }
 
-        internal static void OnGameEnd(EventArgs args)
+        internal static void OnGameEnd(GameEndEventArgs args)
         {
-            Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-        }
-        internal static void OnNotify(GameNotifyEventArgs args)
-        {
-            if (args.EventId == GameEventId.OnHQKill)
+            if (args.WinningTeam == Player.Instance.Team)
             {
-                var killHQ = ObjectManager.Get<Obj_HQ>().First(hq => ObjectManager.GetUnitByNetworkId<AIHeroClient>(args.NetworkId).IsEnemy && hq.IsDead);
-                if (killHQ != null)
+                Chat.Print("endededed");
+                Pet.CurXP += Pet.MaxXP / 10;
+                Pet.CashBalance += 100;
+                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                if (Pet.Sick)
                 {
-                    Chat.Print("endddd");
-                    Pet.CurXP += Pet.MaxXP / 10;
-                    Pet.CashBalance += 100;
-                    Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-                    if (Pet.Sick)
-                    {
-                        Pet.PetDie();
-                    }
-                    Console.WriteLine("endededed");
+                    Pet.PetDie();
                 }
+                Console.WriteLine("endededed");
             }
+            else {
+                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+            }
+        }
+
+        //internal static void OnGameEnd(GameEndEventArgs args)
+        //{
+        //    var winner = args.WinningTeam.IsAlly();
+        //    if (winner)
+        //    {
+                
+        //    }
+        //}
+       // internal static void OnNotify(GameNotifyEventArgs args)
+       // {
+       //     if (args.EventId == GameEventId.OnEndGame)
+       //     {
+       //         var killHQ = ObjectManager.Get<Obj_HQ>();
+       //         if (killHQ != null)
+       //         {
+       //             Chat.Print("endededed");
+       //             Pet.CurXP += Pet.MaxXP / 10;
+       //             Pet.CashBalance += 100;
+       //             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+       //             if (Pet.Sick)
+       //             {
+       //                 Pet.PetDie();
+       //             }
+       //             Console.WriteLine("endededed");
+       //         }
+       //     }
             
-       }
+       //}
     }
 }

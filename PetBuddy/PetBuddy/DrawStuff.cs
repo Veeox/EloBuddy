@@ -28,6 +28,7 @@ namespace PetBuddy
         public static int myTeamDmgY = (int)(Drawing.Height * 0.97) - 20;
         public static int enemyTeamDmgX = (int)(Drawing.Width * 0.68);
         public static int enemyTeamDmgY = (int)(Drawing.Height * 0.97) - 60;
+        public static string tempSprite = null;
 
         //Sprite
         private static readonly TextureLoader TextureLoader = new TextureLoader();
@@ -51,7 +52,9 @@ namespace PetBuddy
 
             if (sprite == null)
             {
+
                 DrawSprite();
+                tempSprite = Pet.mySprite.ToString();
                 //sprite.Hide();
             }
 
@@ -117,8 +120,9 @@ namespace PetBuddy
             }
             if (PetMenu.DrawingMenu["drawsprites"].Cast<CheckBox>().CurrentValue && sprite != null && !PetMenu.DrawingMenu["disDraw"].Cast<CheckBox>().CurrentValue)
             {
-
-                sprite.Draw(new Vector2(xpos + 43, ypos - 60));
+                
+                DrawCurSprite();
+                
                 //sprite.X = xpos + 35;
                 //sprite.Y = ypos - 60;
 
@@ -127,8 +131,24 @@ namespace PetBuddy
             {
                 return;
             }
+
+
     }
-        
+        public static void DrawCurSprite()
+        {
+            if (Pet.mySprite.ToString() != tempSprite)
+            {
+                sprite = null;
+                TextureLoader.Dispose();
+                tempSprite = Pet.mySprite.ToString();
+            }
+            else
+            {
+                sprite.Draw(new Vector2(DrawStuff.xpos + 43, DrawStuff.ypos - 60));
+            }
+        }
+
+
         public static void DrawSprite()
         {
             xpos = PetMenu.DrawingMenu["xpos"].Cast<Slider>().CurrentValue;

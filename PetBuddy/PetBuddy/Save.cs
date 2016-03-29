@@ -102,10 +102,11 @@ namespace PetBuddy
             Pet.CurXP = 0;
             Pet.MaxXP = 100;
             Pet.CashBalance = 0;
-            //PetMain.sprite.Dispose();
+            
             //PetMain.DrawSprite();
             RandomSprite();
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+            
         }
 
         //Name Gen Stuff
@@ -136,7 +137,7 @@ namespace PetBuddy
             if (PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue)
             {
                 FirstRun();
-                Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Started!"));
+                Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Adopted!"));
                 Chat.Print("PetBuddy: New Pet Adopted!");
                 PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue = false;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
