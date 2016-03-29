@@ -30,7 +30,9 @@ namespace PetBuddy
             if (!PetBuddyLoaded)
             {
                 PetMain.Init();
+                Save.SaveData();
                 PetBuddyLoaded = true;
+                Chat.Print("Loaded");
             }
             if (PetBuddyLoaded)
             {

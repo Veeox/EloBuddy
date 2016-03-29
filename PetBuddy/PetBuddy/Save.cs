@@ -78,9 +78,12 @@ namespace PetBuddy
         //Used to save data
         public static void SaveData(string lvl, string currxp, string maxxp, string cash)
         {
-            File.WriteAllText(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, Pet.PetName + "\n" + Pet.mySprite + "\n");
+           // File.WriteAllText(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, Pet.PetName + "\n" + Pet.mySprite + "\n");
+
             using (var file = new StreamWriter(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, true))
             {
+                file.WriteLine(Pet.PetName);
+                file.WriteLine(Pet.mySprite);
                 file.WriteLine(lvl);
                 file.WriteLine(currxp);
                 file.WriteLine(maxxp);
@@ -96,8 +99,8 @@ namespace PetBuddy
             Pet.CurXP = 0;
             Pet.MaxXP = 100;
             Pet.CashBalance = 0;
-            //PetBuddy.sprite.Dispose();
-            //PetBuddy.DrawSprite();
+            //PetMain.sprite.Dispose();
+            //PetMain.DrawSprite();
             RandomSprite();
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
         }

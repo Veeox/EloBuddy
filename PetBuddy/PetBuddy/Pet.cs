@@ -28,7 +28,7 @@ namespace PetBuddy
         //Sprite Vars
         public static int minion_buffer_size = 60;
         public static EloBuddy.SDK.Rendering.Sprite[] sprites = new EloBuddy.SDK.Rendering.Sprite[minion_buffer_size];
-        public EloBuddy.SDK.Rendering.Sprite PetSprite;
+        //public EloBuddy.SDK.Rendering.Sprite PetSprite;
 
         public static void PetRun()
         {
