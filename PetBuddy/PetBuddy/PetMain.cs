@@ -244,7 +244,8 @@ namespace PetBuddy
                 }
                 Console.WriteLine("endededed");
             }
-            else {
+            else
+            {
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
             }
         }
