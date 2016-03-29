@@ -9,6 +9,7 @@ using EloBuddy.SDK.Events;
 using SharpDX;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
+using EloBuddy.SDK.Notifications;
 
 namespace PetBuddy
 {
@@ -17,12 +18,15 @@ namespace PetBuddy
         public static bool PetBuddyLoaded { get; internal set; }
         static void Main(string[] args)
         {
+
             Loading.OnLoadingComplete += OnLoad;
         }
         private static void OnLoad(EventArgs arg)
         {
+            
             PetBuddyLoaded = false;
             Game.OnTick += Game_OnTick;
+            
         }
 
         private static void Game_OnTick(EventArgs arg)
@@ -32,11 +36,13 @@ namespace PetBuddy
                 PetMain.Init();
                 Save.SaveData();
                 PetBuddyLoaded = true;
-                Chat.Print("Loaded");
+                
             }
             if (PetBuddyLoaded)
             {
+                PetMain.DoWelcome();
                 Game.OnTick -= Game_OnTick;
+                
             }
         }
     }

@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters.cs" />
+    <Compile Include="GameAssets.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetMain.cs" />
     <Compile Include="PetMenu.cs" />
@@ -113,6 +114,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Save.cs" />
+    <Compile Include="XPSys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

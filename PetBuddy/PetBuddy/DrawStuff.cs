@@ -12,6 +12,7 @@ using SharpDX;
 using EloBuddy.SDK.Rendering;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
+using EloBuddy.SDK.Notifications;
 
 namespace PetBuddy
 {
@@ -38,7 +39,7 @@ namespace PetBuddy
         internal static void DrawInit()
         {
             Drawing.OnEndScene += Drawing_OnDraw;
-            
+
         }
 
         internal static void Drawing_OnDraw(EventArgs args)
@@ -107,11 +108,11 @@ namespace PetBuddy
                 Drawing.DrawText(xpos, ypos + 80, textColor, "PetBux: $" + (int)Pet.CashBalance);
                 if (Pet.Sick)
                 {
-                    Drawing.DrawText(xpos, ypos + 100, System.Drawing.Color.Red, "Pet Health: Sick (Will die soon!)");
+                    Drawing.DrawText(xpos, ypos + 100, System.Drawing.Color.Red, "Pet Health: Sick");
                 }
                 else
                 {
-                    Drawing.DrawText(xpos, ypos + 100, textColor, "Pet Health: Fine");
+                    Drawing.DrawText(xpos, ypos + 100, System.Drawing.Color.Green, "Pet Health: Fine");
                 }
             }
             if (PetMenu.DrawingMenu["drawsprites"].Cast<CheckBox>().CurrentValue && sprite != null && !PetMenu.DrawingMenu["disDraw"].Cast<CheckBox>().CurrentValue)
@@ -126,8 +127,7 @@ namespace PetBuddy
             {
                 return;
             }
-
-        }
+    }
         
         public static void DrawSprite()
         {

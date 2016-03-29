@@ -8,6 +8,7 @@ using EloBuddy.SDK;
 using SharpDX;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
+using EloBuddy.SDK.Notifications;
 
 namespace PetBuddy
 {
@@ -19,23 +20,44 @@ namespace PetBuddy
         public static Menu DrawingMenu = TitleMenu.AddSubMenu("Drawings", "petdrawings");
 
 
-        public static void InitMenu()
+        internal static void InitMenu()
         {
             #region Info
 
             TitleMenu.AddGroupLabel("PetBuddy by Veeox");
-            TitleMenu.AddGroupLabel("This is currently in BETA");
-            TitleMenu.AddGroupLabel("Please report any bugs to the EloBuddy Forum Post!");
+            TitleMenu.AddLabel("This is currently in BETA");
+            TitleMenu.AddLabel("Please report any bugs to the EloBuddy Forum Post!");
+            TitleMenu.AddSeparator();
+            //if (Program.PetBuddyLoaded)
+            //{
+            //    TitleMenu.AddGroupLabel("Your PetBuddy Stats");
+            //    TitleMenu.AddLabel("Pet Name: " + Pet.PetName);
+            //    TitleMenu.AddLabel("Pet Level: " + (int)Pet.Lvl);
+            //    TitleMenu.AddLabel("Current XP: " + (int)Pet.CurXP + "/" + (int)Pet.MaxXP);
+            //    TitleMenu.AddLabel("PetBux: $" + (int)Pet.CashBalance);
+            //    if (Pet.Sick)
+            //    {
+            //        TitleMenu.AddLabel("Pet Health: Sick (Will die soon!)");
+            //    }
+            //    else
+            //    {
+            //        TitleMenu.AddLabel("Pet Health: Fine");
+            //    }
+            //}
 
             #endregion
 
             #region Shop
+
+            ShopMenu.AddGroupLabel("PetBuddy Shop");
+            ShopMenu.AddSeparator();
 
             #endregion
 
             #region Misc
 
             MiscMenu.AddGroupLabel("Misc Settings");
+            MiscMenu.AddSeparator();
             MiscMenu.Add("track", new CheckBox("Track Game", false));
             
 
@@ -51,9 +73,9 @@ namespace PetBuddy
             DrawingMenu.Add("drawsprites", new CheckBox("Draw Sprites", false));
             DrawingMenu.AddSeparator();
             DrawingMenu.AddLabel("Drawing Positions");
-            DrawingMenu.Add("xpos", new Slider("Draw X Position", 1697, 0, 2500));
-            DrawingMenu.Add("ypos", new Slider("Draw Y Position", 666, 0, 2500));
-            
+            DrawingMenu.Add("xpos", new Slider("Draw X Position", 1711, 0, 2500));
+            DrawingMenu.Add("ypos", new Slider("Draw Y Position", 591, 0, 2500));
+
             #endregion
 
 

@@ -9,6 +9,7 @@ using System.IO;
 using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
+using EloBuddy.SDK.Menu.Values;
 
 namespace PetBuddy
 {
@@ -128,5 +129,23 @@ namespace PetBuddy
 
         }
 
+        public static void NewPet()
+        {
+            if (!PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue)
+            {
+                FirstRun();
+            }
+        }
+
+        public static void ManualSave()
+        {
+            if (!PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue)
+            {
+                //Notifications.AddNotification("PetSharp: Saving...", 2).SetTextColor(PetSharp.NotificationColor);
+                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                //SharpMenu.Z.Item("save").SetValue(false);
+                //Notifications.AddNotification("PetSharp: Progress Saved!", 2).SetTextColor(PetSharp.NotificationColor);
+            }
+        }
     }
 }
