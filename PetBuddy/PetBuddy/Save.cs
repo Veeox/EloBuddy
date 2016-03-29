@@ -10,6 +10,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
 using EloBuddy.SDK.Menu.Values;
+using EloBuddy.SDK.Notifications;
 
 namespace PetBuddy
 {
@@ -79,11 +80,12 @@ namespace PetBuddy
         //Used to save data
         public static void SaveData(string lvl, string currxp, string maxxp, string cash)
         {
-           // File.WriteAllText(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, Pet.PetName + "\n" + Pet.mySprite + "\n");
+            File.WriteAllText(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, Pet.PetName + System.Environment.NewLine);
 
             using (var file = new StreamWriter(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, true))
             {
-                file.WriteLine(Pet.PetName);
+                //file.WriteLine(Pet.PetName);
+                //file.WriteLine("\n");
                 file.WriteLine(Pet.mySprite);
                 file.WriteLine(lvl);
                 file.WriteLine(currxp);
@@ -131,20 +133,26 @@ namespace PetBuddy
 
         public static void NewPet()
         {
-            if (!PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue)
+            if (PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue)
             {
                 FirstRun();
+                Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Started!"));
+                Chat.Print("PetBuddy: New Pet Adopted!");
+                PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue = false;
+                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
             }
         }
 
         public static void ManualSave()
         {
-            if (!PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue)
+            if (PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue)
             {
-                //Notifications.AddNotification("PetSharp: Saving...", 2).SetTextColor(PetSharp.NotificationColor);
+                Notifications.Show(new SimpleNotification("PetBuddy", "Saving..."));
+                Chat.Print("PetBuddy: Saving...");
+                PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue = false;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-                //SharpMenu.Z.Item("save").SetValue(false);
-                //Notifications.AddNotification("PetSharp: Progress Saved!", 2).SetTextColor(PetSharp.NotificationColor);
+                Notifications.Show(new SimpleNotification("PetBuddy", "Progress Saved!"));
+                Chat.Print("PetBuddy: Progress Saved!");
             }
         }
     }

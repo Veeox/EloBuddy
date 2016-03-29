@@ -51,6 +51,9 @@ namespace PetBuddy
 
             ShopMenu.AddGroupLabel("PetBuddy Shop");
             ShopMenu.AddSeparator();
+            ShopMenu.Add("food1", new CheckBox("Buy " + GameAssets.med.Name + " ($" + GameAssets.med.Cost + ")", false));
+            ShopMenu.Add("food2", new CheckBox("Buy " + GameAssets.expdouble.Name + " ($" + GameAssets.expdouble.Cost + ")", false));
+
 
             #endregion
 
@@ -59,7 +62,9 @@ namespace PetBuddy
             MiscMenu.AddGroupLabel("Misc Settings");
             MiscMenu.AddSeparator();
             MiscMenu.Add("track", new CheckBox("Track Game", false));
-            
+            MiscMenu.Add("save", new CheckBox("Manual Save", false));
+            MiscMenu.Add("new", new CheckBox("New Pet (Start Over)", false));
+
 
             #endregion
 

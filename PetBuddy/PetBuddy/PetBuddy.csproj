@@ -114,6 +114,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Save.cs" />
+    <Compile Include="Shop.cs" />
     <Compile Include="XPSys.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,26 +22,25 @@ namespace PetBuddy
     internal class PetMain
     {
         private static string DragonBuff = "s5test_dragonslayerbuff";
-        private static string BaroonBuff = "exaltedwithbaronnashor";
+        //private static string BaroonBuff = "exaltedwithbaronnashor";
         private static int AllyD;
-        private static int AllyB;
+        //private static int AllyB;
         public static float QuadraDelay;
         public static float DoubleDelay;
         public static float TrippleDelay;
         public static float PentaDelay;
         public static float AceDelay;
         public static float WardDelay;
-        public static float bDelay;
+        //public static float bDelay;
         public static AIHeroClient hero { get { return ObjectManager.Player; } }
 
         public static void Init()
         {
-            InitMenu();
             PetInit();
             DrawInit();
             Game.OnNotify += OnGameNotify;
-            Game.OnEnd += OnEnd;
-            
+            Game.OnEnd += OnGameEnd;
+            Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
         }
 
         public static void DoWelcome()
@@ -115,7 +114,7 @@ namespace PetBuddy
                     var pl = FindPlayerByNetworkId(killer);
                     if (Game.Time > AceDelay)
                     {
-                        if (pl != null && pl.IsAlly)
+                        if (pl != null && pl.IsAlly || pl.IsMe)
                         {
                             Pet.CurXP += (Pet.MaxXP / 80) * Pet.XPMulti;
                             Pet.CashBalance += 15;
@@ -152,6 +151,21 @@ namespace PetBuddy
                             Pet.GetSick();
                         }
                     }
+                    break;
+                case GameEventId.OnHQDie:
+                    pl = FindPlayerByNetworkId(killer);
+                    //if (pl != null && pl.IsAlly || pl.IsMe)
+                    //{
+                        Pet.CurXP += Pet.MaxXP / 10;
+                        Pet.CashBalance += 100;
+                        Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                        Save.SaveData();
+                        Chat.Print("end");
+                        if (Pet.Sick)
+                        {
+                            Pet.PetDie();
+                        }
+                   // }
                     break;
             }
         }
@@ -190,23 +204,11 @@ namespace PetBuddy
             }
         }
 
-        public static void BaroonCheck()
+        public static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
         {
-            var allyBbuff = hero.Buffs.Find(x => x.Name == BaroonBuff);
-            if (Game.Time > bDelay)
+            if (sender.IsMe && (args.Buff.DisplayName.ToLower().Contains("hand of baron") || args.Buff.Name.ToLower().Contains("baron") || args.Buff.Name.ToLower().Contains("worm")))
             {
-                // ally kill baroon
-                if (allyBbuff != null && allyBbuff.Count > AllyB)
-                {
-                    AllyB = allyBbuff.Count;
-                    KillBaroon();
-                    bDelay = Game.Time + 3000;
-                }
-            }
-            // baroon expiry
-            if (allyBbuff != null && allyBbuff.Count < AllyB)
-            {
-                AllyB = allyBbuff.Count;
+                KillBaroon();
             }
         }
 
@@ -228,5 +230,29 @@ namespace PetBuddy
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
         }
 
+        internal static void OnGameEnd(EventArgs args)
+        {
+            Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+        }
+        internal static void OnNotify(GameNotifyEventArgs args)
+        {
+            if (args.EventId == GameEventId.OnHQKill)
+            {
+                var killHQ = ObjectManager.Get<Obj_HQ>().First(hq => ObjectManager.GetUnitByNetworkId<AIHeroClient>(args.NetworkId).IsEnemy && hq.IsDead);
+                if (killHQ != null)
+                {
+                    Chat.Print("endddd");
+                    Pet.CurXP += Pet.MaxXP / 10;
+                    Pet.CashBalance += 100;
+                    Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                    if (Pet.Sick)
+                    {
+                        Pet.PetDie();
+                    }
+                    Console.WriteLine("endededed");
+                }
+            }
+            
+       }
     }
 }

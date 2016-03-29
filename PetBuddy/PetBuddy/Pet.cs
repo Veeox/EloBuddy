@@ -38,7 +38,8 @@ namespace PetBuddy
             Save.SaveData();
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnUpdate;
-            
+            PetMenu.InitMenu();
+
         }
 
         private static void Game_OnTick(EventArgs args)
@@ -50,6 +51,7 @@ namespace PetBuddy
             else
             {
                 XPSys.LevelUp();
+                
             }
         }
 
@@ -62,7 +64,9 @@ namespace PetBuddy
             else
             {
                 PetMain.DragonCheck();
-                PetMain.BaroonCheck();
+                Shop.ShopBuy();
+                Save.ManualSave();
+                Save.NewPet();
             }
         }
 
@@ -94,8 +98,9 @@ namespace PetBuddy
             Notifications.Show(new SimpleNotification("PetBuddy", "Your pet has died!"));
             Chat.Print("PetBuddy: Your pet has died!");
             Save.FirstRun();
+            Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
             Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Created!"));
-            Chat.Print("PetBuddy: New Pet Created!");
+            Chat.Print("PetBuddy: New Pet Adopted!");
         }
     }
 }
