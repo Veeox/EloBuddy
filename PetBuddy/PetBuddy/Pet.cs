@@ -80,7 +80,7 @@ namespace PetBuddy
             if (EneMyNexus != null && (EneMyNexus.Health < 1) && !gameEnded)
             {
                 Pet.CurXP += Pet.MaxXP / 10;
-                Pet.CashBalance += 100;
+                Pet.CashBalance += 15;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
                 if (Pet.Sick)
                 {

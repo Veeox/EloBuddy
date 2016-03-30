@@ -65,7 +65,7 @@ namespace PetBuddy
                         if (Game.Time > DoubleDelay)
                         {
                             Pet.CurXP += (Pet.MaxXP / 80) * Pet.XPMulti;
-                            Pet.CashBalance += 10;
+                            Pet.CashBalance += 5;
                             DoubleDelay = Game.Time + 3000;
                         }
 
@@ -78,7 +78,7 @@ namespace PetBuddy
                         if (Game.Time > PentaDelay)
                         {
                             Pet.CurXP += (Pet.MaxXP / 15) * Pet.XPMulti;
-                            Pet.CashBalance += 75;
+                            Pet.CashBalance += 50;
                             PentaDelay = Game.Time + 3000;
                         }
 
@@ -91,7 +91,7 @@ namespace PetBuddy
                         if (Game.Time > QuadraDelay)
                         {
                             Pet.CurXP += (Pet.MaxXP / 45) * Pet.XPMulti;
-                            Pet.CashBalance += 50;
+                            Pet.CashBalance += 20;
                             QuadraDelay = Game.Time + 3000;
                         }
 
@@ -104,7 +104,7 @@ namespace PetBuddy
                         if (Game.Time > TrippleDelay)
                         {
                             Pet.CurXP += (Pet.MaxXP / 75) * Pet.XPMulti;
-                            Pet.CashBalance += 35;
+                            Pet.CashBalance += 10;
                             TrippleDelay = Game.Time + 3000;
                         }
 
@@ -118,7 +118,7 @@ namespace PetBuddy
                         if (pl != null && pl.IsAlly || pl.IsMe)
                         {
                             Pet.CurXP += (Pet.MaxXP / 80) * Pet.XPMulti;
-                            Pet.CashBalance += 15;
+                            Pet.CashBalance += 5;
                             AceDelay = Game.Time + 3000;
                         }
                     }
@@ -128,7 +128,7 @@ namespace PetBuddy
                     if (killer == hero.NetworkId)
                     {
                         Pet.CurXP += (Pet.MaxXP / 75) * Pet.XPMulti;
-                        Pet.CashBalance += 5;
+                        Pet.CashBalance += 2;
                     }
                     break;
                 case GameEventId.OnKillWard:
@@ -216,14 +216,14 @@ namespace PetBuddy
         private static void KillDrag()
         {
             Pet.CurXP += (Pet.MaxXP / 30) * Pet.XPMulti;
-            Pet.CashBalance += 20;
+            Pet.CashBalance += 10;
             Console.WriteLine("Drag Killed");
         }
 
         private static void KillBaroon()
         {
             Pet.CurXP += (Pet.MaxXP / 50) * Pet.XPMulti;
-            Pet.CashBalance += 35;
+            Pet.CashBalance += 20;
             Console.WriteLine("Baroon Killed");
         }
         internal static void OnEnd(EventArgs args)
