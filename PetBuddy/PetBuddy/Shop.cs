@@ -30,16 +30,13 @@ namespace PetBuddy
                     if (!Pet.Sick)
                     {
                         Notifications.Show(new SimpleNotification("PetBuddy", "Your pet is not Sick!"));
-                        Chat.Print("PetBuddy: Your pet is not Sick!");
                         PetMenu.ShopMenu["food1"].Cast<CheckBox>().CurrentValue = false;
                         return;
                     }
                     else
                     {
                         Notifications.Show(new SimpleNotification("PetBuddy", GameAssets.med.Name + " Bought!"));
-                        Chat.Print("PetBuddy: " + GameAssets.med.Name + " Bought!");
                         Notifications.Show(new SimpleNotification("PetBuddy", "Your pet has been cured!"));
-                        Chat.Print("PetBuddy: Your pet has been cured!");
                         Pet.Sick = false;
 
                     }
@@ -50,7 +47,6 @@ namespace PetBuddy
                 else
                 {
                     Notifications.Show(new SimpleNotification("PetBuddy", "Not enough PetBux!"));
-                    Chat.Print("PetBuddy: Not enough PetBux!");
                 }
 
                 PetMenu.ShopMenu["food1"].Cast<CheckBox>().CurrentValue = false;
@@ -65,7 +61,6 @@ namespace PetBuddy
                     if (Pet.FoodXP)
                     {
                         Notifications.Show(new SimpleNotification("PetBuddy", "Cannot Buy Twice!"));
-                        Chat.Print("PetBuddy: Cannot Buy Twice!");
                         PetMenu.ShopMenu["food2"].Cast<CheckBox>().CurrentValue = false;
                         return;
                     }
@@ -74,7 +69,6 @@ namespace PetBuddy
                         if (Bonuses.bonusMulti < 2)
                         {
                             Notifications.Show(new SimpleNotification("PetBuddy", GameAssets.expdouble.Name + " Bought!"));
-                            Chat.Print("PetBuddy: " + GameAssets.expdouble.Name + " Bought!");
                             Pet.FoodXP = true;
                             Pet.XPMulti = 2;
                         }
@@ -90,7 +84,6 @@ namespace PetBuddy
                 else
                 {
                     Notifications.Show(new SimpleNotification("PetBuddy", "Not enough PetBux!"));
-                    Chat.Print("PetBuddy: Not enough PetBux!");
                 }
 
                 PetMenu.ShopMenu["food2"].Cast<CheckBox>().CurrentValue = false;

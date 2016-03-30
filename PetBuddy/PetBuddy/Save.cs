@@ -138,7 +138,6 @@ namespace PetBuddy
             {
                 FirstRun();
                 Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Adopted!"));
-                Chat.Print("PetBuddy: New Pet Adopted!");
                 PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue = false;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
             }
@@ -149,11 +148,9 @@ namespace PetBuddy
             if (PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue)
             {
                 Notifications.Show(new SimpleNotification("PetBuddy", "Saving..."));
-                Chat.Print("PetBuddy: Saving...");
                 PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue = false;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
                 Notifications.Show(new SimpleNotification("PetBuddy", "Progress Saved!"));
-                Chat.Print("PetBuddy: Progress Saved!");
             }
         }
     }

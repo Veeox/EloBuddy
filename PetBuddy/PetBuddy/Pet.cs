@@ -103,7 +103,6 @@ namespace PetBuddy
                 Shop.ShopBuy();
                 Save.ManualSave();
                 Save.NewPet();
-                Chat.Print(Pet.XPMulti);
             }
         }
 
@@ -126,20 +125,16 @@ namespace PetBuddy
         public static void NotiSick()
         {
             Notifications.Show(new SimpleNotification("PetBuddy", "Your pet is sick!"));
-            Chat.Print("PetBuddy: Your pet is sick!");
             Notifications.Show(new SimpleNotification("PetBuddy", "Buy Medicine from the Shop to cure! If your pet is sick for too long it will die!"));
-            Chat.Print("PetBuddy: Buy Medicine from the Shop to cure! If your pet is sick for too long it will die!");
             
         }
 
         public static void PetDie()
         {
             Notifications.Show(new SimpleNotification("PetBuddy", "Your pet has died!"));
-            Chat.Print("PetBuddy: Your pet has died!");
             Save.FirstRun();
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
             Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Created!"));
-            Chat.Print("PetBuddy: New Pet Adopted!");
         }
     }
 }
