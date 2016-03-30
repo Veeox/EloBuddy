@@ -32,6 +32,7 @@ namespace PetBuddy
         public static float AceDelay;
         public static float WardDelay;
         //public static float bDelay;
+
         public static AIHeroClient hero { get { return ObjectManager.Player; } }
 
         public static void Init()
@@ -39,14 +40,14 @@ namespace PetBuddy
             PetInit();
             DrawInit();
             Game.OnNotify += OnGameNotify;
-            Game.OnEnd += OnGameEnd;
             Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
+            
         }
 
         public static void DoWelcome()
         {
-            Notifications.Show(new SimpleNotification("PetBuddy","Loaded!"));
-            Chat.Print("PetBuddy: Loaded!");
+            Notifications.Show(new SimpleNotification("PetBuddy", "PetBuddy has been Loaded!"
+            + System.Environment.NewLine + Bonuses.news));
         }
 
         internal static void OnGameNotify(GameNotifyEventArgs args)
@@ -152,21 +153,21 @@ namespace PetBuddy
                         }
                     }
                     break;
-                //case GameEventId.OnHQDie:
-                //    pl = FindPlayerByNetworkId(killer);
-                //    //if (pl != null && pl.IsAlly || pl.IsMe)
-                //    //{
-                //        Pet.CurXP += Pet.MaxXP / 10;
-                //        Pet.CashBalance += 100;
-                //        Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-                //        Save.SaveData();
-                //        Chat.Print("end");
-                //        if (Pet.Sick)
-                //        {
-                //            Pet.PetDie();
-                //        }
-                //   // }
-                //    break;
+                    //case GameEventId.OnHQDie:
+                    //    pl = FindPlayerByNetworkId(killer);
+                    //    //if (pl != null && pl.IsAlly || pl.IsMe)
+                    //    //{
+                    //        Pet.CurXP += Pet.MaxXP / 10;
+                    //        Pet.CashBalance += 100;
+                    //        Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                    //        Save.SaveData();
+                    //        Chat.Print("end");
+                    //        if (Pet.Sick)
+                    //        {
+                    //            Pet.PetDie();
+                    //        }
+                    //   // }
+                    //    break;
             }
         }
 
@@ -228,26 +229,6 @@ namespace PetBuddy
         internal static void OnEnd(EventArgs args)
         {
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-        }
-
-        internal static void OnGameEnd(GameEndEventArgs args)
-        {
-            if (args.WinningTeam == Player.Instance.Team)
-            {
-                Chat.Print("endededed");
-                Pet.CurXP += Pet.MaxXP / 10;
-                Pet.CashBalance += 100;
-                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-                if (Pet.Sick)
-                {
-                    Pet.PetDie();
-                }
-                Console.WriteLine("endededed");
-            }
-            else
-            {
-                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-            }
         }
 
         //internal static void OnGameEnd(GameEndEventArgs args)

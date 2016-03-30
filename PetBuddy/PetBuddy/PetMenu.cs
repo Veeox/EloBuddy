@@ -25,8 +25,15 @@ namespace PetBuddy
             #region Info
 
             TitleMenu.AddGroupLabel("PetBuddy by Veeox");
-            TitleMenu.AddLabel("This is currently in BETA");
-            TitleMenu.AddLabel("Please report any bugs to the EloBuddy Forum Post!");
+            TitleMenu.AddSeparator();
+            TitleMenu.AddLabel(Bonuses.news);
+            TitleMenu.AddSeparator();
+            TitleMenu.AddSeparator();
+            if (Bonuses.bonusMulti > 1)
+            {
+                TitleMenu.AddGroupLabel("Bonus XP is in effect!!");
+                TitleMenu.AddLabel("Current Bonus: x" + Bonuses.bonusMulti + " XP");
+            }
             TitleMenu.AddSeparator();
             //if (Program.PetBuddyLoaded)
             //{
@@ -79,7 +86,7 @@ namespace PetBuddy
             DrawingMenu.AddSeparator();
             DrawingMenu.AddLabel("Drawing Positions");
             DrawingMenu.Add("xpos", new Slider("Draw X Position", 1711, 0, 2500));
-            DrawingMenu.Add("ypos", new Slider("Draw Y Position", 525, 0, 2500));
+            DrawingMenu.Add("ypos", new Slider("Draw Y Position", 444, 0, 2500));
 
             #endregion
 

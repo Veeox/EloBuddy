@@ -71,10 +71,17 @@ namespace PetBuddy
                     }
                     else
                     {
-                        Notifications.Show(new SimpleNotification("PetBuddy", GameAssets.expdouble.Name + " Bought!"));
-                        Chat.Print("PetBuddy: " + GameAssets.expdouble.Name + " Bought!");
-                        Pet.FoodXP = true;
-                        Pet.XPMulti = 2;
+                        if (Bonuses.bonusMulti < 2)
+                        {
+                            Notifications.Show(new SimpleNotification("PetBuddy", GameAssets.expdouble.Name + " Bought!"));
+                            Chat.Print("PetBuddy: " + GameAssets.expdouble.Name + " Bought!");
+                            Pet.FoodXP = true;
+                            Pet.XPMulti = 2;
+                        }
+                        else
+                        {
+                            Notifications.Show(new SimpleNotification("PetBuddy", "Bonus XP in effect, no need for this item!"));
+                        }
                     }
 
                     //Deduct Cost

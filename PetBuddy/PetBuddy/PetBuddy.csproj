@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bonuses.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="GameAssets.cs" />
     <Compile Include="Pet.cs" />
@@ -137,6 +138,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\BonusValues.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\g4148.png" />
     <Content Include="Resources\g4174.png" />
     <Content Include="Resources\g4205.png" />

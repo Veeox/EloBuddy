@@ -20,13 +20,15 @@ namespace PetBuddy
         {
 
             Loading.OnLoadingComplete += OnLoad;
+            
         }
         private static void OnLoad(EventArgs arg)
         {
-            
+
             PetBuddyLoaded = false;
+            Bonuses.BonusInit();
             Game.OnTick += Game_OnTick;
-            
+
         }
 
         private static void Game_OnTick(EventArgs arg)
@@ -36,14 +38,14 @@ namespace PetBuddy
                 PetMain.Init();
                 Save.SaveData();
                 PetBuddyLoaded = true;
-                
+
             }
             if (PetBuddyLoaded)
             {
                 PetMain.DoWelcome();
                 Game.OnTick -= Game_OnTick;
-                
             }
         }
+        
     }
 }

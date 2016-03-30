@@ -26,6 +26,9 @@ namespace PetBuddy
         public static bool FoodXP = false;
         public static int XPMulti = 1;
         public static string mySprite;
+        public static Obj_HQ EneMyNexus = null;
+        public static Obj_HQ MyNexus = null;
+        private static bool gameEnded = false;
 
         //Sprite Vars
         public static int minion_buffer_size = 60;
@@ -39,7 +42,14 @@ namespace PetBuddy
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnUpdate;
             PetMenu.InitMenu();
-
+            if (EneMyNexus == null)
+            {
+                EneMyNexus = ObjectManager.Get<Obj_HQ>().First(n => n.IsEnemy);
+            }
+            if (MyNexus == null)
+            {
+                MyNexus = ObjectManager.Get<Obj_HQ>().First(n => n.IsAlly);
+            }
         }
 
         private static void Game_OnTick(EventArgs args)
@@ -51,8 +61,34 @@ namespace PetBuddy
             else
             {
                 XPSys.LevelUp();
-                
+                OnEndGame();
             }
+        }
+
+        private static void OnEndGame()
+        {
+            if (EneMyNexus != null && (EneMyNexus.Health > 1))
+            {
+                Core.DelayAction(OnEndGame, 20000);
+                return;
+            }
+            if (MyNexus != null && (MyNexus.Health < 1) && !gameEnded)
+            {
+                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                gameEnded = true;
+            }
+            if (EneMyNexus != null && (EneMyNexus.Health < 1) && !gameEnded)
+            {
+                Pet.CurXP += Pet.MaxXP / 10;
+                Pet.CashBalance += 100;
+                Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                if (Pet.Sick)
+                {
+                    Pet.PetDie();
+                }
+                gameEnded = true;
+            }
+
         }
 
         private static void Game_OnUpdate(EventArgs args)
@@ -67,6 +103,7 @@ namespace PetBuddy
                 Shop.ShopBuy();
                 Save.ManualSave();
                 Save.NewPet();
+                Chat.Print(Pet.XPMulti);
             }
         }
 

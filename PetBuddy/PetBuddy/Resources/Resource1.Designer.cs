@@ -61,6 +61,15 @@ namespace PetBuddy.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 3.
+        /// </summary>
+        public static string BonusValues {
+            get {
+                return ResourceManager.GetString("BonusValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap g4148 {
