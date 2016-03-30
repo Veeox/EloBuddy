@@ -86,7 +86,7 @@ namespace PetBuddy
             DrawingMenu.AddSeparator();
             DrawingMenu.AddLabel("Drawing Positions");
             DrawingMenu.Add("xpos", new Slider("Draw X Position", 1711, 0, 2500));
-            DrawingMenu.Add("ypos", new Slider("Draw Y Position", 444, 0, 2500));
+            DrawingMenu.Add("ypos", new Slider("Draw Y Position", 388, 0, 2500));
 
             #endregion
 
