@@ -34,7 +34,7 @@ namespace PetBuddy
         public static PetItem topHat = new PetItem
         {
             Name = "Top Hat",
-            Cost = 0,
+            Cost = 1500,
             Owned = false
         };
 

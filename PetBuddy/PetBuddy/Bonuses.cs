@@ -15,13 +15,13 @@ namespace PetBuddy
     internal class Bonuses
     {
         public static string news =
-            "Version 0.0.1.0"
+            "Version 0.0.1.5"
             + System.Environment.NewLine +
             ""
             + System.Environment.NewLine +
-            "Thank you for using my addon!"
+            "PetBuddy now has HATS!!"
             + System.Environment.NewLine +
-            "PetBuddy is currently in BETA"
+            "Check out the Pet Shop to purchase!"
             + System.Environment.NewLine +
             "Please report any bugs!"
             + System.Environment.NewLine +
