@@ -18,14 +18,21 @@ namespace PetBuddy
     {
         //File name setup for saving
         public static string FileName;
+        public static string CosFile;
 
 
         public static void SaveData()
         {
             //Grab data from text file else create it
             FileName = "PetBuddy.txt";
-            if (!Directory.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy"))
+            CosFile = "PetCos.txt";
+            if (!Directory.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy") || !File.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName))
             {
+                if(!File.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + CosFile))
+                {
+                    SaveCos();
+                }
+
                 Directory.CreateDirectory(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy");
                 FirstRun();
 
@@ -37,6 +44,21 @@ namespace PetBuddy
 
             }
         }
+
+        public static void SaveCos()
+        {
+            CosFile = "PetCos.txt";
+            if (!Directory.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy") || !File.Exists(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + CosFile))
+            {
+                Directory.CreateDirectory(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy");
+                
+            }
+            else
+            {
+                return;
+            }
+        }
+
         //Used to read data
         public static void ReadSave()
         {
@@ -44,6 +66,8 @@ namespace PetBuddy
             string CurXPStr = null;
             string MaxXPStr = null;
             string CashStr = null;
+            string topHatOwned = null;
+            string stacheOwned = null;
 
             using (var sr = new System.IO.StreamReader(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, true))
             {
@@ -75,7 +99,28 @@ namespace PetBuddy
                 }
                 Converters.ConvertString(LvlStr, CurXPStr, MaxXPStr, CashStr);
             }
+            using (var sr = new System.IO.StreamReader(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + CosFile, true))
+            {
+                string line;
+                int currentLineNumber = 0;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    switch (++currentLineNumber)
+                    {
+                        case 1:
+                            topHatOwned = line;
+                            break;
+                        case 2:
+                            stacheOwned = line;
+                            break;
+                    }
+                }
+                Converters.ConvertString(topHatOwned, stacheOwned);
+
+            }
         }
+
+
 
         //Used to save data
         public static void SaveData(string lvl, string currxp, string maxxp, string cash)
@@ -84,13 +129,22 @@ namespace PetBuddy
 
             using (var file = new StreamWriter(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + FileName, true))
             {
-                //file.WriteLine(Pet.PetName);
-                //file.WriteLine("\n");
                 file.WriteLine(Pet.mySprite);
                 file.WriteLine(lvl);
                 file.WriteLine(currxp);
                 file.WriteLine(maxxp);
                 file.WriteLine(cash);
+                file.Close();
+            }
+        }
+
+        public static void SaveCos(string topHat, string stache)
+        {
+            File.WriteAllText(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + CosFile, topHat + System.Environment.NewLine);
+
+            using (var file = new StreamWriter(EloBuddy.Sandbox.SandboxConfig.DataDirectory + @"\Data\PetBuddy\" + CosFile, true))
+            {
+                file.WriteLine(stache);
                 file.Close();
             }
         }
@@ -102,10 +156,13 @@ namespace PetBuddy
             Pet.CurXP = 0;
             Pet.MaxXP = 100;
             Pet.CashBalance = 0;
+            Pet.topHat = 0;
+            Pet.stache = 0;
             
             //PetMain.DrawSprite();
             RandomSprite();
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+            Converters.ConvertInt(Pet.topHat, Pet.stache);
             
         }
 
@@ -140,6 +197,7 @@ namespace PetBuddy
                 Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Adopted!"));
                 PetMenu.MiscMenu["new"].Cast<CheckBox>().CurrentValue = false;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                Converters.ConvertInt(Pet.topHat, Pet.stache);
             }
         }
 
@@ -150,6 +208,7 @@ namespace PetBuddy
                 Notifications.Show(new SimpleNotification("PetBuddy", "Saving..."));
                 PetMenu.MiscMenu["save"].Cast<CheckBox>().CurrentValue = false;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                Converters.ConvertInt(Pet.topHat, Pet.stache);
                 Notifications.Show(new SimpleNotification("PetBuddy", "Progress Saved!"));
             }
         }

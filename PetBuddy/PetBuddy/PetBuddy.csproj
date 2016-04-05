@@ -138,6 +138,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\TopHat.png" />
     <EmbeddedResource Include="Resources\BonusValues.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -145,6 +146,7 @@
     <Content Include="Resources\g4174.png" />
     <Content Include="Resources\g4205.png" />
     <Content Include="Resources\g4238.png" />
+    <Content Include="Resources\moustache.png" />
     <Content Include="Resources\path4249.png" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,20 @@ namespace PetBuddy
             Owned = false
         };
 
+        public static PetItem topHat = new PetItem
+        {
+            Name = "Top Hat",
+            Cost = 0,
+            Owned = false
+        };
+
+        public static PetItem stache = new PetItem
+        {
+            Name = "Moustache",
+            Cost = 1000,
+            Owned = false
+        };
+
         public static bool IsOwned(this PetItem item)
         {
             return item.Owned;

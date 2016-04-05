@@ -229,35 +229,7 @@ namespace PetBuddy
         internal static void OnEnd(EventArgs args)
         {
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+            Converters.ConvertInt(Pet.topHat, Pet.stache);
         }
-
-        //internal static void OnGameEnd(GameEndEventArgs args)
-        //{
-        //    var winner = args.WinningTeam.IsAlly();
-        //    if (winner)
-        //    {
-                
-        //    }
-        //}
-       // internal static void OnNotify(GameNotifyEventArgs args)
-       // {
-       //     if (args.EventId == GameEventId.OnEndGame)
-       //     {
-       //         var killHQ = ObjectManager.Get<Obj_HQ>();
-       //         if (killHQ != null)
-       //         {
-       //             Chat.Print("endededed");
-       //             Pet.CurXP += Pet.MaxXP / 10;
-       //             Pet.CashBalance += 100;
-       //             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
-       //             if (Pet.Sick)
-       //             {
-       //                 Pet.PetDie();
-       //             }
-       //             Console.WriteLine("endededed");
-       //         }
-       //     }
-            
-       //}
     }
 }

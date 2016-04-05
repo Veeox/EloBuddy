@@ -37,6 +37,7 @@ namespace PetBuddy
             {
                 PetMain.Init();
                 Save.SaveData();
+                Save.SaveCos();
                 PetBuddyLoaded = true;
 
             }

@@ -61,7 +61,7 @@ namespace PetBuddy.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3.
+        ///   Looks up a localized string similar to 1.
         /// </summary>
         public static string BonusValues {
             get {
@@ -112,9 +112,29 @@ namespace PetBuddy.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap moustache {
+            get {
+                object obj = ResourceManager.GetObject("moustache", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap path4249 {
             get {
                 object obj = ResourceManager.GetObject("path4249", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap TopHat {
+            get {
+                object obj = ResourceManager.GetObject("TopHat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -24,6 +24,8 @@ namespace PetBuddy
         public static int CashBalance = 0;
         public static bool nSick, Sick = false;
         public static bool FoodXP = false;
+        public static int topHat;
+        public static int stache;
         public static int XPMulti = 1;
         public static string mySprite;
         public static Obj_HQ EneMyNexus = null;
@@ -39,6 +41,7 @@ namespace PetBuddy
         internal static void PetInit()
         {
             Save.SaveData();
+            Save.SaveCos();
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnUpdate;
             PetMenu.InitMenu();
@@ -75,6 +78,7 @@ namespace PetBuddy
             if (MyNexus != null && (MyNexus.Health < 1) && !gameEnded)
             {
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                Converters.ConvertInt(Pet.topHat, Pet.stache);
                 gameEnded = true;
             }
             if (EneMyNexus != null && (EneMyNexus.Health < 1) && !gameEnded)
@@ -82,6 +86,7 @@ namespace PetBuddy
                 Pet.CurXP += Pet.MaxXP / 10;
                 Pet.CashBalance += 15;
                 Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+                Converters.ConvertInt(Pet.topHat, Pet.stache);
                 if (Pet.Sick)
                 {
                     Pet.PetDie();
@@ -103,6 +108,8 @@ namespace PetBuddy
                 Shop.ShopBuy();
                 Save.ManualSave();
                 Save.NewPet();
+                //PetMenu.Inventory();
+                
             }
         }
 
@@ -134,6 +141,7 @@ namespace PetBuddy
             Notifications.Show(new SimpleNotification("PetBuddy", "Your pet has died!"));
             Save.FirstRun();
             Converters.ConvertInt(Pet.Lvl, Pet.CurXP, Pet.MaxXP, Pet.CashBalance);
+            Converters.ConvertInt(Pet.topHat, Pet.stache);
             Notifications.Show(new SimpleNotification("PetBuddy", "New Pet Created!"));
         }
     }

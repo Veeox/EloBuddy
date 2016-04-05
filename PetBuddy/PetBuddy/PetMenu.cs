@@ -16,8 +16,11 @@ namespace PetBuddy
     {
         private static readonly Menu TitleMenu = MainMenu.AddMenu("PetBuddy", "petbuddy");
         public static Menu ShopMenu = TitleMenu.AddSubMenu("Shop", "shop");
+        public static Menu InventoryMenu = TitleMenu.AddSubMenu("Inventory", "inventory");
         public static Menu MiscMenu = TitleMenu.AddSubMenu("Misc Settings", "misc");
         public static Menu DrawingMenu = TitleMenu.AddSubMenu("Drawings", "petdrawings");
+
+//        public static bool InvMenu = false;
 
 
         internal static void InitMenu()
@@ -58,8 +61,33 @@ namespace PetBuddy
 
             ShopMenu.AddGroupLabel("PetBuddy Shop");
             ShopMenu.AddSeparator();
+
+            #endregion
+
+            #region Consumables
+
+            ShopMenu.AddGroupLabel("Consumables");
             ShopMenu.Add("food1", new CheckBox("Buy " + GameAssets.med.Name + " ($" + GameAssets.med.Cost + ")", false));
             ShopMenu.Add("food2", new CheckBox("Buy " + GameAssets.expdouble.Name + " ($" + GameAssets.expdouble.Cost + ")", false));
+            ShopMenu.AddSeparator();
+
+            #endregion
+
+            #region Cosmetics
+
+            ShopMenu.AddGroupLabel("Cosmetics");
+            ShopMenu.Add("topHat", new CheckBox("Buy " + GameAssets.topHat.Name + " ($" + GameAssets.topHat.Cost + ")", false));
+            ShopMenu.Add("stache", new CheckBox("Buy " + GameAssets.stache.Name + " ($" + GameAssets.stache.Cost + ")", false));
+            ShopMenu.AddSeparator();
+
+            #endregion
+
+            #region Invetory
+
+            InventoryMenu.AddGroupLabel("PetBuddy Inventory");
+            InventoryMenu.AddSeparator();
+            InventoryMenu.Add("topHatEquip", new CheckBox("Equip " + GameAssets.topHat.Name, false));
+            InventoryMenu.Add("stacheEquip", new CheckBox("Equip " + GameAssets.stache.Name, false));
 
 
             #endregion
@@ -91,6 +119,14 @@ namespace PetBuddy
             #endregion
 
 
+        }
+
+        public static void AddStache()
+        {
+            if (Pet.stache > 0)
+            {
+                InventoryMenu.Add("stacheEquip", new CheckBox("Equip " + GameAssets.stache.Name, false));
+            }
         }
     }
 }

@@ -37,6 +37,10 @@ namespace PetBuddy
         public static Sprite sprite = null;
         //public static string petSprite;
 
+        //Cosmetic sprites
+        public static Sprite topHatSprite = null;
+        public static Sprite stacheSprite = null;
+
         internal static void DrawInit()
         {
             Drawing.OnEndScene += Drawing_OnDraw;
@@ -55,7 +59,6 @@ namespace PetBuddy
 
                 DrawSprite();
                 tempSprite = Pet.mySprite.ToString();
-                //sprite.Hide();
             }
 
             xpos = PetMenu.DrawingMenu["xpos"].Cast<Slider>().CurrentValue;
@@ -122,7 +125,9 @@ namespace PetBuddy
             {
                 
                 DrawCurSprite();
-                
+
+                GetCos();
+
                 //sprite.X = xpos + 35;
                 //sprite.Y = ypos - 60;
 
@@ -157,10 +162,84 @@ namespace PetBuddy
             //Draw Sprites
             //Get Pet Sprite
             GetPetSprite();
+
             sprite.Scale = new Vector2(0.12f, 0.12f);
-            //sprite.Draw(new Vector2(xpos + 20, ypos - 75));
 
         }
+
+        public static void GetCos()
+        {
+            if (Pet.topHat < 1 && PetMenu.InventoryMenu["topHatEquip"].Cast<CheckBox>().CurrentValue)
+            {
+
+                Notifications.Show(new SimpleNotification("PetBuddy", "You do not own the " + GameAssets.topHat.Name + " yet!" + System.Environment.NewLine + "To purchase please visit the Pet Shop!"));
+                PetMenu.InventoryMenu["topHatEquip"].Cast<CheckBox>().CurrentValue = false;
+            }
+
+            if (Pet.stache < 1 && PetMenu.InventoryMenu["stacheEquip"].Cast<CheckBox>().CurrentValue)
+            {
+
+                Notifications.Show(new SimpleNotification("PetBuddy", "You do not own the " + GameAssets.stache.Name + " yet!" + System.Environment.NewLine + "To purchase please visit the Pet Shop!"));
+                PetMenu.InventoryMenu["stacheEquip"].Cast<CheckBox>().CurrentValue = false;
+            }
+
+            if (Pet.topHat > 0 && PetMenu.InventoryMenu["topHatEquip"].Cast<CheckBox>().CurrentValue)
+            {
+                if (DrawStuff.topHatSprite == null)
+                { 
+                    TextureLoader.Load("TopHat", Resources.Resource1.TopHat);
+                    topHatSprite = new Sprite(() => TextureLoader["TopHat"]);
+                }
+
+                DrawHat();
+                
+            }
+            
+            if (Pet.stache > 0 && PetMenu.InventoryMenu["stacheEquip"].Cast<CheckBox>().CurrentValue)
+            {
+                if (DrawStuff.stacheSprite == null)
+                {
+                    TextureLoader.Load("moustache", Resources.Resource1.moustache);
+                    stacheSprite = new Sprite(() => TextureLoader["moustache"]);
+                }
+
+                DrawStache();
+                
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        public static void DrawHat()
+        {
+            if (Pet.mySprite == "g4205")
+            {
+                topHatSprite.Scale = new Vector2(1.1f, 1.1f);
+                topHatSprite.Draw(new Vector2(DrawStuff.xpos + 32, DrawStuff.ypos - 130));
+            }
+            else
+            {
+                topHatSprite.Scale = new Vector2(1.1f, 1.1f);
+                topHatSprite.Draw(new Vector2(DrawStuff.xpos + 25, DrawStuff.ypos - 130));
+            }
+        }
+
+        public static void DrawStache()
+        {
+            if (Pet.mySprite == "g4205")
+            {
+                stacheSprite.Draw(new Vector2(DrawStuff.xpos + 34.5f, DrawStuff.ypos - 35));
+                stacheSprite.Scale = new Vector2(1.1f, 1.1f);
+            }
+            else 
+            {
+                stacheSprite.Draw(new Vector2(DrawStuff.xpos + 26.5f, DrawStuff.ypos - 35));
+                stacheSprite.Scale = new Vector2(1.1f, 1.1f);
+            }
+        }
+
         public static void GetPetSprite()
         {
             switch (Pet.mySprite)

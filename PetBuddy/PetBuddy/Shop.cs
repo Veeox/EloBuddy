@@ -16,7 +16,10 @@ namespace PetBuddy
         public static void ShopBuy()
         {
 
-            if (!PetMenu.ShopMenu["food1"].Cast<CheckBox>().CurrentValue && (!PetMenu.ShopMenu["food2"].Cast<CheckBox>().CurrentValue))
+            if (!PetMenu.ShopMenu["food1"].Cast<CheckBox>().CurrentValue 
+                && (!PetMenu.ShopMenu["food2"].Cast<CheckBox>().CurrentValue)
+                && (!PetMenu.ShopMenu["topHat"].Cast<CheckBox>().CurrentValue)
+                && (!PetMenu.ShopMenu["stache"].Cast<CheckBox>().CurrentValue))
             {
                 return;
             }
@@ -89,6 +92,69 @@ namespace PetBuddy
                 PetMenu.ShopMenu["food2"].Cast<CheckBox>().CurrentValue = false;
             }
 
+            if (PetMenu.ShopMenu["topHat"].Cast<CheckBox>().CurrentValue)
+            {
+                var CanBuy = GameAssets.PurchaseAvailable(GameAssets.topHat);
+
+                if (CanBuy)
+                {
+                    if (Pet.topHat > 0)
+                    {
+                        Notifications.Show(new SimpleNotification("PetBuddy", "Cannot buy two hats!"));
+                        PetMenu.ShopMenu["topHat"].Cast<CheckBox>().CurrentValue = false;
+                        return;
+                    }
+                    else
+                    {
+                        Notifications.Show(new SimpleNotification("PetBuddy", GameAssets.topHat.Name + " Bought!"));
+                        Notifications.Show(new SimpleNotification("PetBuddy", "Equip " + GameAssets.topHat.Name + " from your inventory!"));
+                        
+                        Pet.topHat = 1;
+                        Converters.ConvertInt(Pet.topHat, Pet.stache);
+                    }
+
+                    //Deduct Cost
+                    Pet.CashBalance -= GameAssets.topHat.Cost;
+                }
+                else
+                {
+                    Notifications.Show(new SimpleNotification("PetBuddy", "Not enough PetBux!"));
+                }
+
+                PetMenu.ShopMenu["topHat"].Cast<CheckBox>().CurrentValue = false;
+            }
+
+            if (PetMenu.ShopMenu["stache"].Cast<CheckBox>().CurrentValue)
+            {
+                var CanBuy = GameAssets.PurchaseAvailable(GameAssets.stache);
+
+                if (CanBuy)
+                {
+                    if (Pet.stache > 0)
+                    {
+                        Notifications.Show(new SimpleNotification("PetBuddy", "Cannot buy two Moustaches!"));
+                        PetMenu.ShopMenu["stache"].Cast<CheckBox>().CurrentValue = false;
+                        return;
+                    }
+                    else
+                    {
+                        Notifications.Show(new SimpleNotification("PetBuddy", GameAssets.stache.Name + " Bought!"));
+                        Notifications.Show(new SimpleNotification("PetBuddy", "Equip " + GameAssets.stache.Name + " from your inventory!"));
+                        
+                        Pet.stache = 1;
+                        Converters.ConvertInt(Pet.topHat, Pet.stache);
+                    }
+
+                    //Deduct Cost
+                    Pet.CashBalance -= GameAssets.stache.Cost;
+                }
+                else
+                {
+                    Notifications.Show(new SimpleNotification("PetBuddy", "Not enough PetBux!"));
+                }
+
+                PetMenu.ShopMenu["stache"].Cast<CheckBox>().CurrentValue = false;
+            }
         }
     }
 }

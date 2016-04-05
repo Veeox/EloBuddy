@@ -21,6 +21,13 @@ namespace PetBuddy
             Save.SaveData(level, currentXP, MaximumXP, CashBal);
         }
 
+        public static void ConvertInt(int topHatOwned, int stacheOwned)
+        {
+            string TH = Pet.topHat.ToString();
+            string Mostache = Pet.stache.ToString();
+            Save.SaveCos(TH, Mostache);
+        }
+
         //Convert String
         public static void ConvertString(string lvl, string currxp, string maxxp, string cash)
         {
@@ -34,6 +41,16 @@ namespace PetBuddy
             Pet.CurXP = currentXP;
             Pet.MaxXP = maximumXP;
             Pet.CashBalance = CashBal;
+        }
+
+        public static void ConvertString(string topHatOwned, string stacheOwned)
+        {
+
+            int TH = int.Parse(topHatOwned);
+            int Mostache = int.Parse(stacheOwned);
+
+            Pet.topHat = TH;
+            Pet.stache = Mostache;
         }
     }
 }
