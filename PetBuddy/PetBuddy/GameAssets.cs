@@ -20,7 +20,7 @@ namespace PetBuddy
         public static PetItem med = new PetItem
         {
             Name = "Medicine",
-            Cost = 100,
+            Cost = 30,
             Owned = false
         };
 
